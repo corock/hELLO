@@ -2,34 +2,27 @@
  * Tidory Configuration
  * https://tidory.com/docs/configuration/
  */
+require('dotenv').config();
+
 module.exports = {
-  ts_session: null,
-  url: null,
+  ts_session: process.env.TS_SESSION,
+  url: process.env.URL,
 
   /**
-  * Preview
-  */
+   * Preview
+   */
   preview: {
     /**
-     * homeType
-     *
-     * NONE
-     * COVER
+     * Preview Mode
+     * @var {index | entry | category | tag | location | media | guestbook}
      */
-    homeType: 'NONE',
+     mode: 'index',
 
-    /**
-    * Preview Mode
-    *
-    * index
-    * entry
-    * category
-    * tag,
-    * location
-    * media,
-    * guestbook
-    */
-    mode: 'index'
+     /**
+      * homeType
+      * @var {NONE | COVER}
+      */
+     homeType: 'NONE',
   },
 
   /**
@@ -37,23 +30,23 @@ module.exports = {
    */
   alias: {
     '@': 'assets',
-    '~views': 'views'
+    '~views': 'views',
   },
 
   /**
-  * Webpack Configuration
-  *
-  * @param {object} webpackConfig
-  */
-  extends (webpackConfig) {
+   * Webpack Configuration
+   *
+   * @param {object} webpackConfig
+   */
+  extends(webpackConfig) {
     webpackConfig.module.rules = [
       {
         enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader'
+        loader: 'eslint-loader',
       },
-      ...webpackConfig.module.rules
-    ]
-  }
-}
+      ...webpackConfig.module.rules,
+    ];
+  },
+};

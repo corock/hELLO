@@ -1,7 +1,8 @@
 env:
   browser: true
 
-extends: standard
+# extends: standard
+extends: plugin:prettier/recommended
 
 globals:
   UIkit: readonly
@@ -12,3 +13,7 @@ globals:
   T: readonly
 
 ignorePatterns: dist/
+
+parser: babel-eslint
+rules:
+  prettier/prettier: 0
